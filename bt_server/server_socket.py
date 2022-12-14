@@ -16,7 +16,8 @@ uuid = "94f39d29-7d6d-437d-973b-fba39e49d4ee"
 def start():
     bluetooth.advertise_service(server_sock, "RPi Robot server", service_id=uuid,
                                 service_classes=[uuid, bluetooth.SERIAL_PORT_CLASS],
-                                profiles=[bluetooth.SERIAL_PORT_PROFILE]
+                                profiles=[bluetooth.SERIAL_PORT_PROFILE],
+                                protocols=[bluetooth.OBEX_UUID]
                                 )
     print("Waiting for connection on RFCOMM channel", port)
 
