@@ -37,48 +37,47 @@ def control(
 ) -> None:
     if duty_cycle < 0 or duty_cycle > 100:
         typer.echo("Error: duty cycle should be between 0 and 100 (0 and 100 included)")
-        raise typer.Exit()
+        raise typer.Exit(1)
 
-    match movement:
-        case "backward":
-            typer.echo(f"Initializing backwards movement for {vreme} seconds with duty cycle of {duty_cycle}")
-            controls.backward(duty_cycle)
-            time.sleep(vreme)
-            controls.cleanup()
-            raise typer.Exit()
-        case "forward":
-            typer.echo(f"Initializing forwards movement for {vreme} seconds with duty cycle of {duty_cycle}")
-            controls.forward(duty_cycle)
-            time.sleep(vreme)
-            controls.cleanup()
-            raise typer.Exit()
-        case "right":
-            typer.echo(f"Initializing right turn for {vreme} seconds with duty cycle of {duty_cycle}")
-            controls.right(duty_cycle)
-            time.sleep(vreme)
-            controls.cleanup()
-            raise typer.Exit()
-        case "left":
-            typer.echo(f"Initializing left turn for {vreme} seconds with duty cycle of {duty_cycle}")
-            controls.left(duty_cycle)
-            time.sleep(vreme)
-            controls.cleanup()
-            raise typer.Exit()
-        case "parallel_left":
-            typer.echo(f"Initializing parallel left turn for {vreme} seconds with duty cycle of {duty_cycle}")
-            controls.parallel_left(duty_cycle)
-            time.sleep(vreme)
-            controls.cleanup()
-            raise typer.Exit()
-        case "parallel_right":
-            typer.echo(f"Initializing parallel right tun for {vreme} seconds with duty cycle of {duty_cycle}")
-            controls.parallel_right(duty_cycle)
-            time.sleep(vreme)
-            controls.cleanup()
-            raise typer.Exit()
-        case "_":
-            typer.echo("Error: Invalid movement type.")
-            typer.Exit(1)
+    if movement == "backward":
+        typer.echo(f"Initializing backwards movement for {vreme} seconds with duty cycle of {duty_cycle}")
+        controls.backward(duty_cycle)
+        time.sleep(vreme)
+        controls.cleanup()
+        raise typer.Exit()
+    elif movement == "forward":
+        typer.echo(f"Initializing forwards movement for {vreme} seconds with duty cycle of {duty_cycle}")
+        controls.forward(duty_cycle)
+        time.sleep(vreme)
+        controls.cleanup()
+        raise typer.Exit()
+    elif movement == "right":
+        typer.echo(f"Initializing right turn for {vreme} seconds with duty cycle of {duty_cycle}")
+        controls.right(duty_cycle)
+        time.sleep(vreme)
+        controls.cleanup()
+        raise typer.Exit()
+    elif movement == "left":
+        typer.echo(f"Initializing left turn for {vreme} seconds with duty cycle of {duty_cycle}")
+        controls.left(duty_cycle)
+        time.sleep(vreme)
+        controls.cleanup()
+        raise typer.Exit()
+    elif movement == "parallel_left":
+        typer.echo(f"Initializing parallel left turn for {vreme} seconds with duty cycle of {duty_cycle}")
+        controls.parallel_left(duty_cycle)
+        time.sleep(vreme)
+        controls.cleanup()
+        raise typer.Exit()
+    elif movement == "parallel_right":
+        typer.echo(f"Initializing parallel right tun for {vreme} seconds with duty cycle of {duty_cycle}")
+        controls.parallel_right(duty_cycle)
+        time.sleep(vreme)
+        controls.cleanup()
+        raise typer.Exit()
+    else:
+        typer.echo("Error: Invalid movement type.")
+        raise typer.Exit(1)
 
 
 @app.callback()
