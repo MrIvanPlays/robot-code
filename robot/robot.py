@@ -30,6 +30,7 @@ ENB2 = 33  # GPIO 13 to ENB PWM speed of back left motor
 
 print("Initialize GPIO pins")
 GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
 
 GPIO.setup(IN11, GPIO.OUT)
 GPIO.setup(IN21, GPIO.OUT)
