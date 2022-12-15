@@ -3,4 +3,4 @@
 from bt_server import server_socket as socket
 
 if __name__ == "__main__":
-    socket.start()
+    print("Started")
