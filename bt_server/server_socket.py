@@ -1,5 +1,5 @@
 import bluetooth
-import RPi.GPIO as GPIO
+import subprocess
 
 def readlines(socket):
     buffer = socket.recv(1024)
@@ -16,11 +16,6 @@ def readlines(socket):
                 buffer += more
     if buffer:
         yield buffer
-
-#Setup GPIO        
-LED_PIN = 7 # GPIO4
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(LED_PIN, GPIO.OUT)
 
 server_sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
 
@@ -45,12 +40,18 @@ for line in readlines(client_sock):
     print("Received [%s]" % line)
     if line == "quit":
         break
-    if line == "on":
-        GPIO.output(LED_PIN, GPIO.HIGH)
-    if line == "off":
-        GPIO.output(LED_PIN, GPIO.LOW)
-
-GPIO.cleanup()        
+    if line == "forward":
+        forward_cmd = subprocess.run(["rcontr", "control", "--movement forward", "--time 120", "--duty-cycle 10"])
+        print("Exit code: %d" % forward_cmd.returncode)
+    if line == "backward":
+        backward_cmd = subprocess.run(["rcontr", "control", "--movement backward", "--time 120", "--duty-cycle 10"])
+        print("Exit code: %d" % backward_cmd.returncode)
+    if line == "left":
+        left = subprocess.run(["rcontr", "control", "--movement left", "--time 120", "--duty-cycle 10"])
+        print("Exit code: %d" % left.returncode)
+    if line == "right":
+        right = subprocess.run(["rcontr", "control", "--movement right", "--time 120", "--duty-cycle 10"])
+        print("Exit code: %d" % right.returncode)
 
 client_sock.close()
 server_sock.close()
