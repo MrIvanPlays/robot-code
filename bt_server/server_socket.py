@@ -3,6 +3,17 @@ import subprocess
 
 
 def readlines(socket):
+    buffer = socket.recv(1024).decode("utf-8")
+    buffering = True
+    while buffering:
+        if "\n" in buffer:
+            return buffer
+        else:
+            more = socket.recv(1024)
+            if not more:
+                buffering = False
+            else:
+                buffer += more.decode("utf-8")
     # buffer = socket.recv(1024)
     # buffering = True
     # while buffering:
@@ -17,7 +28,7 @@ def readlines(socket):
     #             buffer += more
     # if buffer:
     #     yield buffer
-    return socket.recv(1024).decode("utf-8").splitlines()
+    #return socket.recv(1024).decode("utf-8").splitlines()
 
 
 server_sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
@@ -41,7 +52,7 @@ while True:
     client_sock, address = server_sock.accept()
     print("Connection from ", address)
 
-    received = readlines(client_sock)
+    received = readlines(client_sock).splitlines()
     duty_cycle = received[1]
     movement = received[0]
     print("read duty_cycle of " + duty_cycle + " with movement type of " + movement)
