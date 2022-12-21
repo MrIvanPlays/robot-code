@@ -80,6 +80,13 @@ def control(
         raise typer.Exit(1)
 
 
+@app.command
+def cleanup(
+
+) -> None:
+    controls.cleanup()
+    raise typer.Exit()
+
 @app.callback()
 def main(
         version: Optional[bool] = typer.Option(

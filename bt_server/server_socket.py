@@ -37,6 +37,8 @@ print("Listening for incoming connections")
 client_sock, address = server_sock.accept()
 print("Connection from ", address)
 
+# TODO: Need to make it so that it doesn't disconnect the server
+
 for line in readlines(client_sock):
     print("Received [%s]" % line)
     if line == "quit":
@@ -61,4 +63,3 @@ for line in readlines(client_sock):
         print("Exit code: %d" % pRight.returncode)
 
 client_sock.close()
-server_sock.close()
