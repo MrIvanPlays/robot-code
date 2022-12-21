@@ -41,18 +41,24 @@ for line in readlines(client_sock):
     print("Received [%s]" % line)
     if line == "quit":
         break
-    if line == "forward":
+    if line == b'forward':
         forward_cmd = subprocess.run(["rcontr", "control", "--movement forward", "--time 120", "--duty-cycle 10"])
         print("Exit code: %d" % forward_cmd.returncode)
-    if line == "backward":
+    if line == b'backward':
         backward_cmd = subprocess.run(["rcontr", "control", "--movement backward", "--time 120", "--duty-cycle 10"])
         print("Exit code: %d" % backward_cmd.returncode)
-    if line == "left":
+    if line == b'left':
         left = subprocess.run(["rcontr", "control", "--movement left", "--time 120", "--duty-cycle 10"])
         print("Exit code: %d" % left.returncode)
-    if line == "right":
+    if line == b'right':
         right = subprocess.run(["rcontr", "control", "--movement right", "--time 120", "--duty-cycle 10"])
         print("Exit code: %d" % right.returncode)
+    if line == b'parallelLeft':
+        pLeft = subprocess.run(["rcontr", "control", "--movement parallel_left", "--time 120", "--duty-cycle 10"])
+        print("Exit code: %d" % pLeft.returncode)
+    if line == b'parallelRight':
+        pRight = subprocess.run(["rcontr", "control", "--movement parallel_right", "--time 120", "--duty-cycle 10"])
+        print("Exit code: %d" % pRight.returncode)
 
 client_sock.close()
 server_sock.close()
