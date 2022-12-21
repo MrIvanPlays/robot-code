@@ -25,7 +25,7 @@ def control(
             help="Change the duty cycle of the application. Should be between 0 and 100 (0 and 100 included)"
         ),
         vreme: int = typer.Option(
-            1 / 1000,
+            500 / 1000,
             "--time",
             help="For how much time should the robot do the move you need. Measured in seconds"
         ),

@@ -37,38 +37,30 @@ bluetooth.advertise_service(server_sock,
                             )
 
 print("Listening for incoming connections")
-client_sock, address = server_sock.accept()
-print("Connection from ", address)
+while True:
+    client_sock, address = server_sock.accept()
+    print("Connection from ", address)
 
-received = readlines(client_sock)
-duty_cycle = received[1]
-movement = received[0]
-print("read duty_cycle of " + duty_cycle + " with movement type of " + movement)
-# index = 0
-# for line in readlines(client_sock):
-#     print("Received [%s]" % line)
-#     if index == 0:
-#         movement = line
-#     if index == 1:
-#         duty_cycle = line
-#     index = index + 1
+    received = readlines(client_sock)
+    duty_cycle = received[1]
+    movement = received[0]
+    print("read duty_cycle of " + duty_cycle + " with movement type of " + movement)
 
-if movement == 'forward':
-    forward_cmd = subprocess.run(["rcontr", "control", "--movement forward", "--duty-cycle " + duty_cycle])
-    print("Exit code: %d" % forward_cmd.returncode)
-if movement == 'backward':
-    backward_cmd = subprocess.run(["rcontr", "control", "--movement backward", "--duty-cycle " + duty_cycle])
-    print("Exit code: %d" % backward_cmd.returncode)
-if movement == 'left':
-    left = subprocess.run(["rcontr", "control", "--movement left",  "--duty-cycle " + duty_cycle])
-    print("Exit code: %d" % left.returncode)
-if movement == 'right':
-    right = subprocess.run(["rcontr", "control", "--movement right", "--duty-cycle " + duty_cycle])
-    print("Exit code: %d" % right.returncode)
-if movement == 'parallelLeft':
-    pLeft = subprocess.run(["rcontr", "control", "--movement parallel_left", "--duty-cycle " + duty_cycle])
-    print("Exit code: %d" % pLeft.returncode)
-if movement == 'parallelRight':
-    pRight = subprocess.run(["rcontr", "control", "--movement parallel_right", "--duty-cycle " + duty_cycle])
-    print("Exit code: %d" % pRight.returncode)
-
+    if movement == 'forward':
+        forward_cmd = subprocess.run(["rcontr", "control", "--movement forward", "--duty-cycle " + duty_cycle])
+        print("Exit code: %d" % forward_cmd.returncode)
+    if movement == 'backward':
+        backward_cmd = subprocess.run(["rcontr", "control", "--movement backward", "--duty-cycle " + duty_cycle])
+        print("Exit code: %d" % backward_cmd.returncode)
+    if movement == 'left':
+        left = subprocess.run(["rcontr", "control", "--movement left",  "--duty-cycle " + duty_cycle])
+        print("Exit code: %d" % left.returncode)
+    if movement == 'right':
+        right = subprocess.run(["rcontr", "control", "--movement right", "--duty-cycle " + duty_cycle])
+        print("Exit code: %d" % right.returncode)
+    if movement == 'parallelLeft':
+        pLeft = subprocess.run(["rcontr", "control", "--movement parallel_left", "--duty-cycle " + duty_cycle])
+        print("Exit code: %d" % pLeft.returncode)
+    if movement == 'parallelRight':
+        pRight = subprocess.run(["rcontr", "control", "--movement parallel_right", "--duty-cycle " + duty_cycle])
+        print("Exit code: %d" % pRight.returncode)
