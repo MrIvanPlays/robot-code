@@ -5,8 +5,8 @@ def readlines(socket):
     buffer = socket.recv(1024)
     buffering = True
     while buffering:
-        if "\n" in buffer:
-            (line, buffer) = buffer.split("\n", 1)
+        if "\n".encode() in buffer:
+            (line, buffer) = buffer.split("\n".encode(), 1)
             yield line
         else:
             more = socket.recv(1024)
@@ -33,6 +33,7 @@ bluetooth.advertise_service(server_sock,
         profiles = [bluetooth.SERIAL_PORT_PROFILE]
     )
 
+print("Listening for incoming connections")
 client_sock, address = server_sock.accept()
 print("Connection from ", address)
 
