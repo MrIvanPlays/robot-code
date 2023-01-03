@@ -28,7 +28,9 @@ try:
         if not data:
             break
         received = data.decode("utf-8").splitlines()
-        duty_cycle = received[1]
+        duty_cycle = received[1][0:2]
+        if not duty_cycle[-1].isdigit():
+            duty_cycle = duty_cycle[0:1]
         movement = received[0]
         print("read duty_cycle of " + duty_cycle + " with movement type of " + movement)
 
