@@ -1,6 +1,10 @@
 import bluetooth
 import subprocess
+import RPi.GPIO as GPIO
 
+LED = 11 # GPIO17
+
+GPIO.setup(LED, GPIO.OUT)
 
 server_sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
 
@@ -19,6 +23,7 @@ bluetooth.advertise_service(server_sock,
                             )
 
 print("Listening for incoming connections")
+GPIO.output(LED, True)
 client_sock, address = server_sock.accept()
 print("Connection from ", address)
 
@@ -58,5 +63,6 @@ except OSError:
     pass
 
 print("Disconnected")
+GPIO.output(LED, False)
 client_sock.close()
 server_sock.close()
