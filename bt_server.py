@@ -52,6 +52,8 @@ try:
         if movement == 'parallelRight':
             pRight = subprocess.run(["rcontr", "control", "--movement parallel_right", "--duty-cycle " + duty_cycle])
             print("Exit code: %d" % pRight.returncode)
+        if movement == 'shutdown':
+            subprocess.run(["shutdown", "now"])
 except OSError:
     pass
 
