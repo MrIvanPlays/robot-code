@@ -4,6 +4,8 @@ import RPi.GPIO as GPIO
 
 LED = 11 # GPIO17
 
+GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
 GPIO.setup(LED, GPIO.OUT)
 
 server_sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
