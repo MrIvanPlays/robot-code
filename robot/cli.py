@@ -17,6 +17,14 @@ def _version_callback(value: bool) -> None:
         raise typer.Exit()
 
 
+
+@app.command
+def cleanup(
+
+) -> None:
+    controls.cleanup()
+    raise typer.Exit()
+
 @app.command()
 def control(
         duty_cycle: int = typer.Option(
@@ -37,38 +45,25 @@ def control(
     if movement == "backward":
         typer.echo(f"Initializing backwards movement with duty cycle of {duty_cycle}")
         controls.backward(duty_cycle)
-        raise typer.Exit()
     elif movement == "forward":
         typer.echo(f"Initializing forwards movement with duty cycle of {duty_cycle}")
         controls.forward(duty_cycle)
-        raise typer.Exit()
     elif movement == "right":
         typer.echo(f"Initializing right turn with duty cycle of {duty_cycle}")
         controls.right(duty_cycle)
-        raise typer.Exit()
     elif movement == "left":
         typer.echo(f"Initializing left turn with duty cycle of {duty_cycle}")
         controls.left(duty_cycle)
-        raise typer.Exit()
     elif movement == "parallel_left":
         typer.echo(f"Initializing parallel left turn with duty cycle of {duty_cycle}")
         controls.parallel_left(duty_cycle)
-        raise typer.Exit()
     elif movement == "parallel_right":
         typer.echo(f"Initializing parallel right turn with duty cycle of {duty_cycle}")
         controls.parallel_right(duty_cycle)
-        raise typer.Exit()
     else:
         typer.echo("Error: Invalid movement type.")
         raise typer.Exit(1)
 
-
-@app.command
-def cleanup(
-
-) -> None:
-    controls.cleanup()
-    raise typer.Exit()
 
 @app.callback()
 def main(
