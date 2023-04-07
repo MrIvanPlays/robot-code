@@ -70,6 +70,8 @@ try:
         if movement == 'shutdown':
             subprocess.run(["shutdown", "now"])
         if movement == 'stop':
+            if task is not None:
+                task.cancel()
             controls.cleanup()
 except OSError:
     pass
