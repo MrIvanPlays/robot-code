@@ -32,6 +32,14 @@ GPIO.output(LED, True)
 client_sock, address = server_sock.accept()
 print("Connection from ", address)
 
+
+class RepeatTimer(threading.Timer):
+    def run(self):
+        while not self.finished.wait:
+            controls.initialize()
+            self.function(*self.args, **self.kwargs)
+
+
 task = None
 try:
     while True:
@@ -43,22 +51,22 @@ try:
         if not duty_cycle[-1].isdigit():
             duty_cycle = duty_cycle[0:1]
         movement = received[0]
-        if task != None:
+        if task is not None:
             task.cancel()
         print("read duty_cycle of " + duty_cycle + " with movement type of " + movement)
 
         if movement == 'forward':
-            task = threading.Timer(0.01, controls.forward(int(duty_cycle))).start()
+            task = RepeatTimer(0.01, controls.forward(int(duty_cycle))).start()
         if movement == 'backward':
-            task = threading.Timer(0.01, controls.backward(int(duty_cycle))).start()
+            task = RepeatTimer(0.01, controls.backward(int(duty_cycle))).start()
         if movement == 'left':
-            task = threading.Timer(0.01, controls.left(int(duty_cycle))).start()
+            task = RepeatTimer(0.01, controls.left(int(duty_cycle))).start()
         if movement == 'right':
-            task = threading.Timer(0.01, controls.right(int(duty_cycle))).start()
+            task = RepeatTimer(0.01, controls.right(int(duty_cycle))).start()
         if movement == 'parallelLeft':
-            task = threading.Timer(0.01, controls.parallel_left(int(duty_cycle))).start()
+            task = RepeatTimer(0.01, controls.parallel_left(int(duty_cycle))).start()
         if movement == 'parallelRight':
-            task = threading.Timer(0.01, controls.parallel_right(int(duty_cycle))).start()
+            task = RepeatTimer(0.01, controls.parallel_right(int(duty_cycle))).start()
         if movement == 'shutdown':
             subprocess.run(["shutdown", "now"])
         if movement == 'stop':

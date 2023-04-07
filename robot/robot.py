@@ -28,26 +28,28 @@ IN42 = 22  # GPIO 25 - back left wheel direction
 ENA2 = 35  # GPIO 19 to ENA PWM speed of back right motor
 ENB2 = 33  # GPIO 13 to ENB PWM speed of back left motor
 
-print("Initialize GPIO pins")
-GPIO.setmode(GPIO.BOARD)
-GPIO.setwarnings(False)
 
-GPIO.setup(IN11, GPIO.OUT)
-GPIO.setup(IN21, GPIO.OUT)
-GPIO.setup(IN31, GPIO.OUT)
-GPIO.setup(IN41, GPIO.OUT)
-GPIO.setup(IN12, GPIO.OUT)
-GPIO.setup(IN22, GPIO.OUT)
-GPIO.setup(IN32, GPIO.OUT)
-GPIO.setup(IN42, GPIO.OUT)
+def initialize():
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setwarnings(False)
 
-GPIO.setup(ENA1, GPIO.OUT)
-GPIO.setup(ENB1, GPIO.OUT)
-GPIO.setup(ENA2, GPIO.OUT)
-GPIO.setup(ENB2, GPIO.OUT)
+    GPIO.setup(IN11, GPIO.OUT)
+    GPIO.setup(IN21, GPIO.OUT)
+    GPIO.setup(IN31, GPIO.OUT)
+    GPIO.setup(IN41, GPIO.OUT)
+    GPIO.setup(IN12, GPIO.OUT)
+    GPIO.setup(IN22, GPIO.OUT)
+    GPIO.setup(IN32, GPIO.OUT)
+    GPIO.setup(IN42, GPIO.OUT)
 
-print("Initialize ENA and ENB pins")
-print("f = 1kHz")
+    GPIO.setup(ENA1, GPIO.OUT)
+    GPIO.setup(ENB1, GPIO.OUT)
+    GPIO.setup(ENA2, GPIO.OUT)
+    GPIO.setup(ENB2, GPIO.OUT)
+
+
+initialize()
+
 frontRightMotor = GPIO.PWM(ENA1, 1000)
 frontLeftMotor = GPIO.PWM(ENB1, 1000)
 
@@ -82,8 +84,6 @@ def forward(duty_cycle):
     backRightMotor.ChangeDutyCycle(duty_cycle)
     backLeftMotor.ChangeDutyCycle(duty_cycle)
 
-    GPIO.setmode(GPIO.BOARD)
-
     GPIO.output(IN11, False)
     GPIO.output(IN21, True)
     GPIO.output(IN31, True)
@@ -100,9 +100,6 @@ def backward(duty_cycle):
     backRightMotor.ChangeDutyCycle(duty_cycle)
     backLeftMotor.ChangeDutyCycle(duty_cycle)
 
-
-    GPIO.setmode(GPIO.BOARD)
-
     GPIO.output(IN11, True)
     GPIO.output(IN21, False)
     GPIO.output(IN31, False)
@@ -117,8 +114,6 @@ def backward(duty_cycle):
 def right(duty_cycle):
     frontRightMotor.ChangeDutyCycle(duty_cycle)
     backLeftMotor.ChangeDutyCycle(duty_cycle)
-
-    GPIO.setmode(GPIO.BOARD)
 
     GPIO.output(IN11, True)
     GPIO.output(IN21, False)
@@ -135,8 +130,6 @@ def parallel_right(duty_cycle):
     frontLeftMotor.ChangeDutyCycle(duty_cycle)
     backLeftMotor.ChangeDutyCycle(duty_cycle)
 
-    GPIO.setmode(GPIO.BOARD)
-
     GPIO.output(IN11, False)
     GPIO.output(IN21, False)
     GPIO.output(IN31, True)
@@ -152,8 +145,6 @@ def left(duty_cycle):
     frontLeftMotor.ChangeDutyCycle(duty_cycle)
     backRightMotor.ChangeDutyCycle(duty_cycle)
 
-    GPIO.setmode(GPIO.BOARD)
-
     GPIO.output(IN11, False)
     GPIO.output(IN21, False)
     GPIO.output(IN31, True)
@@ -168,8 +159,6 @@ def left(duty_cycle):
 def parallel_left(duty_cycle):
     frontRightMotor.ChangeDutyCycle(duty_cycle)
     backRightMotor.ChangeDutyCycle(duty_cycle)
-
-    GPIO.setmode(GPIO.BOARD)
 
     GPIO.output(IN11, True)
     GPIO.output(IN21, False)
