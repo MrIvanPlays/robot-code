@@ -24,11 +24,6 @@ def control(
             "--duty-cycle",
             help="Change the duty cycle of the application. Should be between 0 and 100 (0 and 100 included)"
         ),
-        vreme: int = typer.Option(
-            1,
-            "--time",
-            help="For how much time should the robot do the move you need. Measured in seconds"
-        ),
         movement: str = typer.Option(
             "forward",
             "--movement",
@@ -40,40 +35,28 @@ def control(
         raise typer.Exit(1)
 
     if movement == "backward":
-        typer.echo(f"Initializing backwards movement for {vreme} seconds with duty cycle of {duty_cycle}")
+        typer.echo(f"Initializing backwards movement with duty cycle of {duty_cycle}")
         controls.backward(duty_cycle)
-        time.sleep(vreme)
-        controls.cleanup()
         raise typer.Exit()
     elif movement == "forward":
-        typer.echo(f"Initializing forwards movement for {vreme} seconds with duty cycle of {duty_cycle}")
+        typer.echo(f"Initializing forwards movement with duty cycle of {duty_cycle}")
         controls.forward(duty_cycle)
-        time.sleep(vreme)
-        controls.cleanup()
         raise typer.Exit()
     elif movement == "right":
-        typer.echo(f"Initializing right turn for {vreme} seconds with duty cycle of {duty_cycle}")
+        typer.echo(f"Initializing right turn with duty cycle of {duty_cycle}")
         controls.right(duty_cycle)
-        time.sleep(vreme)
-        controls.cleanup()
         raise typer.Exit()
     elif movement == "left":
-        typer.echo(f"Initializing left turn for {vreme} seconds with duty cycle of {duty_cycle}")
+        typer.echo(f"Initializing left turn with duty cycle of {duty_cycle}")
         controls.left(duty_cycle)
-        time.sleep(vreme)
-        controls.cleanup()
         raise typer.Exit()
     elif movement == "parallel_left":
-        typer.echo(f"Initializing parallel left turn for {vreme} seconds with duty cycle of {duty_cycle}")
+        typer.echo(f"Initializing parallel left turn with duty cycle of {duty_cycle}")
         controls.parallel_left(duty_cycle)
-        time.sleep(vreme)
-        controls.cleanup()
         raise typer.Exit()
     elif movement == "parallel_right":
-        typer.echo(f"Initializing parallel right tun for {vreme} seconds with duty cycle of {duty_cycle}")
+        typer.echo(f"Initializing parallel right turn with duty cycle of {duty_cycle}")
         controls.parallel_right(duty_cycle)
-        time.sleep(vreme)
-        controls.cleanup()
         raise typer.Exit()
     else:
         typer.echo("Error: Invalid movement type.")

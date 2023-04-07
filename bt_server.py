@@ -61,6 +61,9 @@ try:
             print("Exit code: %d" % pRight.returncode)
         if movement == 'shutdown':
             subprocess.run(["shutdown", "now"])
+        if movement == 'stop':
+            stop = subprocess.run(["rcontr", "cleanup"])
+            print("Exit code: %d" % stop.returncode)
 except OSError:
     pass
 
