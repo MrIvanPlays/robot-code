@@ -1,6 +1,7 @@
 import bluetooth
 import subprocess
 import RPi.GPIO as GPIO
+import threading
 
 from robot import robot as controls
 
@@ -31,6 +32,7 @@ GPIO.output(LED, True)
 client_sock, address = server_sock.accept()
 print("Connection from ", address)
 
+task = None
 try:
     while True:
         data = client_sock.recv(1024)
@@ -41,26 +43,22 @@ try:
         if not duty_cycle[-1].isdigit():
             duty_cycle = duty_cycle[0:1]
         movement = received[0]
+        if task != None:
+            task.cancel()
         print("read duty_cycle of " + duty_cycle + " with movement type of " + movement)
 
         if movement == 'forward':
-            while True:
-                controls.forward(int(duty_cycle))
+            task = threading.Timer(0.01, controls.forward(int(duty_cycle))).start()
         if movement == 'backward':
-            while True:
-                controls.backward(int(duty_cycle))
+            task = threading.Timer(0.01, controls.backward(int(duty_cycle))).start()
         if movement == 'left':
-            while True:
-                controls.left(int(duty_cycle))
+            task = threading.Timer(0.01, controls.left(int(duty_cycle))).start()
         if movement == 'right':
-            while True:
-                controls.right(int(duty_cycle))
+            task = threading.Timer(0.01, controls.right(int(duty_cycle))).start()
         if movement == 'parallelLeft':
-            while True:
-                controls.parallel_left(int(duty_cycle))
+            task = threading.Timer(0.01, controls.parallel_left(int(duty_cycle))).start()
         if movement == 'parallelRight':
-            while True:
-                controls.parallel_right(int(duty_cycle))
+            task = threading.Timer(0.01, controls.parallel_right(int(duty_cycle))).start()
         if movement == 'shutdown':
             subprocess.run(["shutdown", "now"])
         if movement == 'stop':
