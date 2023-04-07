@@ -45,22 +45,22 @@ try:
 
         if movement == 'forward':
             while True:
-                controls.forward(duty_cycle)
+                controls.forward(int(duty_cycle))
         if movement == 'backward':
             while True:
-                controls.backward(duty_cycle)
+                controls.backward(int(duty_cycle))
         if movement == 'left':
             while True:
-                controls.left(duty_cycle)
+                controls.left(int(duty_cycle))
         if movement == 'right':
             while True:
-                controls.right(duty_cycle)
+                controls.right(int(duty_cycle))
         if movement == 'parallelLeft':
             while True:
-                controls.parallel_left(duty_cycle)
+                controls.parallel_left(int(duty_cycle))
         if movement == 'parallelRight':
             while True:
-                controls.parallel_right(duty_cycle)
+                controls.parallel_right(int(duty_cycle))
         if movement == 'shutdown':
             subprocess.run(["shutdown", "now"])
         if movement == 'stop':
