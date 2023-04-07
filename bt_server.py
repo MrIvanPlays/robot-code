@@ -2,6 +2,8 @@ import bluetooth
 import subprocess
 import RPi.GPIO as GPIO
 
+from robot import robot as controls
+
 LED = 11 # GPIO17
 
 GPIO.setmode(GPIO.BOARD)
@@ -42,28 +44,27 @@ try:
         print("read duty_cycle of " + duty_cycle + " with movement type of " + movement)
 
         if movement == 'forward':
-            forward_cmd = subprocess.run(["rcontr", "control", "--movement forward", "--duty-cycle " + duty_cycle])
-            print("Exit code: %d" % forward_cmd.returncode)
+            while True:
+                controls.forward(duty_cycle)
         if movement == 'backward':
-            backward_cmd = subprocess.run(["rcontr", "control", "--movement backward", "--duty-cycle " + duty_cycle])
-            print("Exit code: %d" % backward_cmd.returncode)
+            while True:
+                controls.backward(duty_cycle)
         if movement == 'left':
-            left = subprocess.run(["rcontr", "control", "--movement left",  "--duty-cycle " + duty_cycle])
-            print("Exit code: %d" % left.returncode)
+            while True:
+                controls.left(duty_cycle)
         if movement == 'right':
-            right = subprocess.run(["rcontr", "control", "--movement right", "--duty-cycle " + duty_cycle])
-            print("Exit code: %d" % right.returncode)
+            while True:
+                controls.right(duty_cycle)
         if movement == 'parallelLeft':
-            pLeft = subprocess.run(["rcontr", "control", "--movement parallel_left", "--duty-cycle " + duty_cycle])
-            print("Exit code: %d" % pLeft.returncode)
+            while True:
+                controls.parallel_left(duty_cycle)
         if movement == 'parallelRight':
-            pRight = subprocess.run(["rcontr", "control", "--movement parallel_right", "--duty-cycle " + duty_cycle])
-            print("Exit code: %d" % pRight.returncode)
+            while True:
+                controls.parallel_right(duty_cycle)
         if movement == 'shutdown':
             subprocess.run(["shutdown", "now"])
         if movement == 'stop':
-            stop = subprocess.run(["rcontr", "cleanup"])
-            print("Exit code: %d" % stop.returncode)
+            controls.cleanup()
 except OSError:
     pass
 

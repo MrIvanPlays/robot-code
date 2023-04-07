@@ -77,39 +77,43 @@ def cleanup():
 
 
 def forward(duty_cycle):
-    GPIO.output(IN11, True)
-    GPIO.output(IN21, False)
+    frontRightMotor.ChangeDutyCycle(duty_cycle)
+    frontLeftMotor.ChangeDutyCycle(duty_cycle)
+    backRightMotor.ChangeDutyCycle(duty_cycle)
+    backLeftMotor.ChangeDutyCycle(duty_cycle)
+
+    GPIO.output(IN11, False)
+    GPIO.output(IN21, True)
     GPIO.output(IN31, True)
     GPIO.output(IN41, False)
-    GPIO.output(IN12, True)
-    GPIO.output(IN22, False)
+    GPIO.output(IN12, False)
+    GPIO.output(IN22, True)
     GPIO.output(IN32, True)
     GPIO.output(IN42, False)
 
-    frontRightMotor.ChangeDutyCycle(duty_cycle)
-    frontLeftMotor.ChangeDutyCycle(duty_cycle)
-    backRightMotor.ChangeDutyCycle(duty_cycle)
-    backLeftMotor.ChangeDutyCycle(duty_cycle)
-
 
 def backward(duty_cycle):
-    GPIO.output(IN11, False)
-    GPIO.output(IN21, True)
-    GPIO.output(IN31, False)
-    GPIO.output(IN41, True)
-    GPIO.output(IN12, False)
-    GPIO.output(IN22, True)
-    GPIO.output(IN32, False)
-    GPIO.output(IN42, True)
-
     frontRightMotor.ChangeDutyCycle(duty_cycle)
     frontLeftMotor.ChangeDutyCycle(duty_cycle)
     backRightMotor.ChangeDutyCycle(duty_cycle)
     backLeftMotor.ChangeDutyCycle(duty_cycle)
+
+
+    GPIO.output(IN11, True)
+    GPIO.output(IN21, False)
+    GPIO.output(IN31, False)
+    GPIO.output(IN41, True)
+    GPIO.output(IN12, True)
+    GPIO.output(IN22, False)
+    GPIO.output(IN32, False)
+    GPIO.output(IN42, True)
 
 
 # makes front right and back left motor turn forward
 def right(duty_cycle):
+    frontRightMotor.ChangeDutyCycle(duty_cycle)
+    backLeftMotor.ChangeDutyCycle(duty_cycle)
+
     GPIO.output(IN11, True)
     GPIO.output(IN21, False)
     GPIO.output(IN31, False)
@@ -118,13 +122,13 @@ def right(duty_cycle):
     GPIO.output(IN22, False)
     GPIO.output(IN32, True)
     GPIO.output(IN42, False)
-
-    frontRightMotor.ChangeDutyCycle(duty_cycle)
-    backLeftMotor.ChangeDutyCycle(duty_cycle)
 
 
 # makes front and back left motors to turn forward
 def parallel_right(duty_cycle):
+    frontLeftMotor.ChangeDutyCycle(duty_cycle)
+    backLeftMotor.ChangeDutyCycle(duty_cycle)
+
     GPIO.output(IN11, False)
     GPIO.output(IN21, False)
     GPIO.output(IN31, True)
@@ -134,12 +138,12 @@ def parallel_right(duty_cycle):
     GPIO.output(IN32, True)
     GPIO.output(IN42, False)
 
-    frontLeftMotor.ChangeDutyCycle(duty_cycle)
-    backLeftMotor.ChangeDutyCycle(duty_cycle)
-
 
 # Makes front left and back right motor turn forward
 def left(duty_cycle):
+    frontLeftMotor.ChangeDutyCycle(duty_cycle)
+    backRightMotor.ChangeDutyCycle(duty_cycle)
+
     GPIO.output(IN11, False)
     GPIO.output(IN21, False)
     GPIO.output(IN31, True)
@@ -149,12 +153,12 @@ def left(duty_cycle):
     GPIO.output(IN32, False)
     GPIO.output(IN42, False)
 
-    frontLeftMotor.ChangeDutyCycle(duty_cycle)
-    backRightMotor.ChangeDutyCycle(duty_cycle)
-
 
 # makes front and back right motors to turn forward
 def parallel_left(duty_cycle):
+    frontRightMotor.ChangeDutyCycle(duty_cycle)
+    backRightMotor.ChangeDutyCycle(duty_cycle)
+
     GPIO.output(IN11, True)
     GPIO.output(IN21, False)
     GPIO.output(IN31, False)
@@ -163,6 +167,3 @@ def parallel_left(duty_cycle):
     GPIO.output(IN22, False)
     GPIO.output(IN32, False)
     GPIO.output(IN42, False)
-
-    frontRightMotor.ChangeDutyCycle(duty_cycle)
-    backRightMotor.ChangeDutyCycle(duty_cycle)
