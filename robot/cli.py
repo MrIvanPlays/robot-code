@@ -18,7 +18,7 @@ def _version_callback(value: bool) -> None:
 
 
 
-@app.command
+@app.command()
 def cleanup(
 
 ) -> None:
