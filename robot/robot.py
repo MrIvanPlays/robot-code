@@ -170,18 +170,20 @@ def left(duty_cycle):
 # makes front and back right motors to turn forward
 def parallel_left(duty_cycle):
     frontRightMotor.ChangeDutyCycle(duty_cycle)
+    frontLeftMotor.ChangeDutyCycle(duty_cycle)
     backRightMotor.ChangeDutyCycle(duty_cycle)
+    backLeftMotor.ChangeDutyCycle(duty_cycle)
 
     initialize()
 
     GPIO.output(IN11, True)
     GPIO.output(IN21, False)
 
-    GPIO.output(IN31, True)
-    GPIO.output(IN41, False)
+    GPIO.output(IN31, False)
+    GPIO.output(IN41, True)
 
     GPIO.output(IN12, False)
     GPIO.output(IN22, True)
 
-    GPIO.output(IN32, False)
-    GPIO.output(IN42, True)
+    GPIO.output(IN32, True)
+    GPIO.output(IN42, False)
