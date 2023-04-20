@@ -185,5 +185,5 @@ def parallel_left(duty_cycle):
     GPIO.output(IN12, True)
     GPIO.output(IN22, False)
 
-    GPIO.output(IN32, True)
-    GPIO.output(IN42, False)
+    GPIO.output(IN32, False)
+    GPIO.output(IN42, True)
