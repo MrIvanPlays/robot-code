@@ -64,6 +64,8 @@ backLeftMotor.start(0)
 
 
 def stop():
+    initialize()
+
     GPIO.output(IN11, False)
     GPIO.output(IN21, False)
     GPIO.output(IN31, False)
@@ -84,6 +86,8 @@ def forward(duty_cycle):
     backRightMotor.ChangeDutyCycle(duty_cycle)
     backLeftMotor.ChangeDutyCycle(duty_cycle)
 
+    initialize()
+
     GPIO.output(IN11, False)
     GPIO.output(IN21, True)
     GPIO.output(IN31, True)
@@ -100,6 +104,8 @@ def backward(duty_cycle):
     backRightMotor.ChangeDutyCycle(duty_cycle)
     backLeftMotor.ChangeDutyCycle(duty_cycle)
 
+    initialize()
+
     GPIO.output(IN11, True)
     GPIO.output(IN21, False)
     GPIO.output(IN31, False)
@@ -114,6 +120,8 @@ def backward(duty_cycle):
 def right(duty_cycle):
     frontRightMotor.ChangeDutyCycle(duty_cycle)
     backLeftMotor.ChangeDutyCycle(duty_cycle)
+
+    initialize()
 
     GPIO.output(IN11, True)
     GPIO.output(IN21, False)
@@ -130,6 +138,8 @@ def parallel_right(duty_cycle):
     frontLeftMotor.ChangeDutyCycle(duty_cycle)
     backLeftMotor.ChangeDutyCycle(duty_cycle)
 
+    initialize()
+
     GPIO.output(IN11, False)
     GPIO.output(IN21, False)
     GPIO.output(IN31, True)
@@ -145,6 +155,8 @@ def left(duty_cycle):
     frontLeftMotor.ChangeDutyCycle(duty_cycle)
     backRightMotor.ChangeDutyCycle(duty_cycle)
 
+    initialize()
+
     GPIO.output(IN11, False)
     GPIO.output(IN21, False)
     GPIO.output(IN31, True)
@@ -159,6 +171,8 @@ def left(duty_cycle):
 def parallel_left(duty_cycle):
     frontRightMotor.ChangeDutyCycle(duty_cycle)
     backRightMotor.ChangeDutyCycle(duty_cycle)
+
+    initialize()
 
     GPIO.output(IN11, True)
     GPIO.output(IN21, False)
