@@ -162,9 +162,9 @@ def left(duty_cycle):
     GPIO.output(IN31, False)
     GPIO.output(IN41, False)
     GPIO.output(IN12, False)
-    GPIO.output(IN22, True)
+    GPIO.output(IN22, False)
     GPIO.output(IN32, False)
-    GPIO.output(IN42, False)
+    GPIO.output(IN42, True)
 
 
 # makes front and back right motors to turn forward
