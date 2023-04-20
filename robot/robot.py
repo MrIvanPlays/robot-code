@@ -123,13 +123,13 @@ def right(duty_cycle):
 
     initialize()
 
-    GPIO.output(IN11, True)
+    GPIO.output(IN11, False)
     GPIO.output(IN21, False)
-    GPIO.output(IN31, False)
+    GPIO.output(IN31, True)
     GPIO.output(IN41, False)
-    GPIO.output(IN12, False)
+    GPIO.output(IN12, True)
     GPIO.output(IN22, False)
-    GPIO.output(IN32, True)
+    GPIO.output(IN32, False)
     GPIO.output(IN42, False)
 
 
@@ -157,13 +157,13 @@ def left(duty_cycle):
 
     initialize()
 
-    GPIO.output(IN11, False)
+    GPIO.output(IN11, True)
     GPIO.output(IN21, False)
-    GPIO.output(IN31, True)
+    GPIO.output(IN31, False)
     GPIO.output(IN41, False)
-    GPIO.output(IN12, True)
+    GPIO.output(IN12, False)
     GPIO.output(IN22, False)
-    GPIO.output(IN32, False)
+    GPIO.output(IN32, True)
     GPIO.output(IN42, False)
 
 
